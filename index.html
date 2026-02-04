@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will you be Timothy's Valentine? 💘</title>
+<style>
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Heading */
+h1 {
+  color: #fff;
+  font-size: 2.2em;
+  margin-bottom: 20px;
+  animation: pop 1s ease-in-out infinite alternate;
+  text-align: center;
+  z-index: 5;
+  padding: 0 10px;
+}
+
+@keyframes pop {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+/* Buttons */
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 10;
+  position: absolute;
+  transition: all 0.2s ease;
+}
+
+#yes {
+  background: #ff2f68;
+  color: white;
+  box-shadow: 0 0 15px rgba(255,47,104,0.7);
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+}
+
+#no {
+  background: white;
+  color: #ff2f68;
+  left: 40%;
+  top: 60%;
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 6s linear infinite;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Message */
+#message {
+  color: white;
+  font-size: 24px;
+  display: none;
+  text-align: center;
+  margin: 20px 10px;
+  word-wrap: break-word;
+}
+
+/* Image */
+#arsenalImage {
+  max-width: 90%;
+  height: auto;
+  border-radius: 15px;
+  margin-top: 20px;
+  display: none;
+  object-fit: contain;
+}
+
+/* Video */
+#funnyVideo {
+  width: 90%;
+  height: auto;
+  margin-top: 20px;
+  display: none;
+  border-radius: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 { font-size: 1.8em; }
+  button { font-size: 16px; padding: 10px 20px; }
+  #message { font-size: 20px; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.5em; }
+  button { font-size: 14px; padding: 8px 18px; }
+  #message { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<h1>Will you be Timothy's Valentine? 💘</h1>
+
+<button id="yes">Yes ❤️</button>
+<button id="no">No 😅</button>
+
+<div id="message">You tried to say NO… but will you vote for me? 😏</div>
+
+<img id="arsenalImage" src="arsenal.png" alt="Timothy's Valentine">
+
+<video id="funnyVideo" autoplay loop muted>
+  <source src="messi1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<script>
+window.onload = function() {
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const message = document.getElementById("message");
+  const arsenalImg = document.getElementById("arsenalImage");
+  const funnyVideo = document.getElementById("funnyVideo");
+  const question = document.querySelector("h1");
+
+  // No button dodge
+  noBtn.addEventListener("mouseover", function() {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    question.innerText = "Hey 😭 why are you chasing me?";
+  });
+
+  // Yes button click
+  yesBtn.onclick = function() {
+    question.style.display = "none";
+    noBtn.style.display = "none";
+    yesBtn.style.display = "none";
+    message.style.display = "block";
+    arsenalImg.style.display = "block";
+    funnyVideo.style.display = "block";
+    funnyVideo.play();
+  };
+
+  // Hearts
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+
+  setInterval(createHeart, 400);
+};
+</script>
+
+</body>
+</html>
